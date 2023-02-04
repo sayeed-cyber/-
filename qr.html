@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      .qr-code {
+        width: 50%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Generate QR Code</h1>
+    <input type="text" id="data">
+    <button id="generate-btn">Generate QR Code</button>
+    <br><br>
+    <img id="qr-code" class="qr-code">
+    <a download="qr-code.png" id="download-link">Download QR Code</a>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script>
+      const generateBtn = document.getElementById("generate-btn");
+      const dataInput = document.getElementById("data");
+      const qrCode = document.getElementById("qr-code");
+      const downloadLink = document.getElementById("download-link");
+
+      generateBtn.addEventListener("click", function() {
+        const data = dataInput.value;
+        const qr = new QRCode(qrCode, {
+          text: data,
+          width: 128,
+          height: 128,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+        qrCode.src = qr._el.toDataURL();
+        downloadLink.href = qrCode.src;
+      });
+    </script>
+  </body>
+</html>
