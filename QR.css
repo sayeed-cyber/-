@@ -11,7 +11,7 @@ body{
   padding: 0 10px;
   min-height: 100vh;
   align-items: center;
-  background: #3498DB;
+  background: black;
   justify-content: center;
 }
 ::selection{
@@ -104,4 +104,10 @@ header p{
   .qr-code img{
     width: 160px;
   }  
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
