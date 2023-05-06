@@ -9,6 +9,28 @@
   <meta name="keywords" content="global, template, html, sass, jquery">
   <meta name="author" content="Bucky Maler">
   <link rel="stylesheet" href="assets/css/main.css">
+  <script>
+function sendRequest() {
+  // get the values of the input fields
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var service = document.getElementById("service").value;
+  // check if the fields are not empty
+  if (name && email && service) {
+    // create a WhatsApp message with the request details
+    var message = "Hello, I'm " + name + " and I'm interested in " + service + ". My email is " + email + ".";
+    // encode the message for URL
+    var encodedMessage = encodeURIComponent(message);
+    // create a WhatsApp link with your phone number and the message
+    var link = "https://wa.me/1234567890?text=" + encodedMessage;
+    // open the link in a new window
+    window.open(link, "_blank");
+  } else {
+    // alert the user to fill all the fields
+    alert("Please fill all the fields.");
+  }
+}
+</script>
 </head>
 <body>
 
@@ -174,6 +196,7 @@
                 <div class="work-request--options">
                   <span class="options-a">
                     <input id="opt-1" type="checkbox" value="app design">
+                  
                     <label for="opt-1">
                       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                       viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
@@ -237,17 +260,7 @@
                     </label>
                   </span>
                 </div>
-                <div class="work-request--information">
-                  <div class="information-name">
-                    <input id="name" type="text" spellcheck="false">
-                    <label for="name">Name</label>
-                  </div>
-                  <div class="information-email">
-                    <input id="email" type="email" spellcheck="false">
-                    <label for="email">Email</label>
-                  </div>
-                </div>
-                <input type="submit" value="Send Request">
+          
               </form>
             </div>
           </li>

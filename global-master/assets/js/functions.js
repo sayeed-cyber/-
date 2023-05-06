@@ -278,3 +278,25 @@ $( document ).ready(function() {
   transitionLabels();
 
 });
+
+function sendRequest() {
+  // get the values of the input fields
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  // get the value of the selected service
+  var service = document.querySelector(".service-list .active").textContent;
+  // check if the fields are not empty
+  if (name && email && service) {
+    // create a WhatsApp message with the request details
+    var message = "Hello, I'm " + name + " and I'm interested in " + service + ". My email is " + email + ".";
+    // encode the message for URL
+    var encodedMessage = encodeURIComponent(message);
+    // create a WhatsApp link with your phone number and the message
+    var link = "https://wa.me/1234567890?text=" + encodedMessage;
+    // open the link in a new window
+    window.open(link, "_blank");
+  } else {
+    // alert the user to fill all the fields
+    alert("Please fill all the fields.");
+  }
+}
