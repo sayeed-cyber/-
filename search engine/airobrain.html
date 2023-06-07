@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://innoovatum.com/ -->
+<html class="text-gray-900 leading-tight"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>airobrain</title>
+     <script async="" src="./Innoovatum_files/analytics.js.download"></script>
+     
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="./Innoovatum_files/app.css" rel="stylesheet">
+<style type="text/css">
+    .dropdown:hover .dropdown-menu {
+  display: block;
+}
+</style>   
+<style>
+  body {
+    background-color: rgb(174, 0, 255);
+  }
+</style>
+</head>
+
+<body>
+
+    
+
+
+<!-- Start of nav bar-->
+
+
+
+
+
+<!-- End Of Nav Bar-->
+
+
+
+  <!-- Main Content-->
+
+<div class="min-h-screen bg-white-500 py-6 flex flex-col justify-center sm:py-12" style="min-height: 80vh;">
+ <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+   <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl" style="background-color: rgb(0, 255, 136);"></div>
+    <div class="relative px-4 py-6 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+      <div class="max-w-md mx-auto">
+        <div>
+          <center><h1 style="font-size: 40px;color: #ebac25;"><b>Airobrain</b></h1></center>
+          
+          
+        </div>
+        <div class="divide-y divide-gray-200">
+
+          <div class="py-0 text-base leading-4 space-y-2 text-gray-500 sm:text-xl sm:leading-7">
+           
+           <!--Search Bar -->
+               
+           <div class="p-2">
+            <form class="bg-white flex items-center rounded-full shadow-xl" style="border: 1px solid rgb(253, 131, 131);" action="https://innoovatum.com/results">
+              <input class="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" type="text" id="query" name="query" placeholder="Search engineering thing" autocomplete="off" style="border-color: #cd05ff;">
+              
+              <div class="p-4">
+                <button type="submit" class="bg-blue-400 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-7 h-7 flex items-right justify-center transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110" style="background-color: rgb(205, 5, 255);">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-15 w-15" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                  </svg>   
+                </button>
+              </div>
+             </form>
+          </div>
+
+           <!--End search Bar here-->
+            
+          </div>
+          
+            
+            <div class="py-2">
+        
+       
+</div>
+            
+        </div>
+    </div>
+</div>
+      </div>
+    
+  
+
+
+  
+
+
+<script src="./Innoovatum_files/alpine.min.js.download" defer=""></script>
+<script type="text/javascript">
+  document.getElementById('togglemebutton').onclick = function() {
+  document.getElementById("resultnav").classList.toggle("hidden");
+}
+
+//document.getElementById('togglemebutton').onclick = function () {
+//  document.getElementById("toggleme").classList.toggle("hidden");
+//}
+
+
+const toggleprofile = document.getElementById("toggleprofile");
+const resultprofile = document.getElementById("resultprofile");
+[...document.querySelectorAll('body')].forEach(el => {
+  el.addEventListener('click', event => {
+    if (event.target.parentElement.id !== "toggleprofile") {
+      console.clear();
+      console.log(event.target.parentElement.id)
+      resultprofile.classList.add("hidden")
+    }else{
+    resultprofile.classList.toggle("hidden")}
+  })
+})
+</script>
+
+
+<script>
+$(document).ready(function(){
+
+ $('#query').keyup(function(){ 
+        var query = $(this).val();
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+         $.ajax({
+          url:"https://innoovatum.com/welcome/fetch",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           $('#countryList').fadeIn();  
+                    $('#countryList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#query').val($(this).text());  
+        $('#countryList').fadeOut();  
+    });  
+
+});
+</script>
+
+</body></html>
