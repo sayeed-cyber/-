@@ -64,6 +64,7 @@
   <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
 
   <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
   <script>
     let scanner;
     let currentCameraIndex = 0;
@@ -74,7 +75,8 @@
 
       scanner.addListener('scan', function (content) {
         scanner.stop();
-        document.getElementById('result').innerHTML = content;
+        const decryptedContent = decryptData(content);
+        document.getElementById('result').innerHTML = decryptedContent;
       });
 
       Instascan.Camera.getCameras()
@@ -107,6 +109,12 @@
 
         startScanner(currentCameraIndex);
       }
+    }
+
+    function decryptData(data) {
+      // Decrypt the data using SHA-256
+      const decryptedData = CryptoJS.SHA256(data).toString(CryptoJS.enc.Hex);
+      return decryptedData;
     }
 
     // Start scanning QR codes using the back camera
