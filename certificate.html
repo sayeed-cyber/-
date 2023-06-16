@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Innoovatum's certificate authentication </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: aqua;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #ebaeae;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #video-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 20px;
+    }
+
+    #video-preview {
+      width: 100%;
+      height: auto;
+      transform: scaleX(-1);
+    }
+
+    .result-section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    #result {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #decoded-text {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .toggle-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-button:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .toggle-button {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>QR Code Scanner</h1>
+    <div id="video-container">
+      <video id="video-preview"></video>
+    </div>
+    <div class="result-section">
+      <h2>certificate unique ID</h2>
+      <div id="result"></div>
+    </div>
+    <div class="result-section">
+      <h2>certificate details </h2>
+      <div id="decoded-text"></div>
+    </div>
+    <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
+  </div>
+
+  <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <script>
+    let scanner;
+    let currentCameraIndex = 0;
+
+    function startScanner(cameraIndex) {
+      const video = document.getElementById('video-preview');
+      scanner = new Instascan.Scanner({ video });
+
+      scanner.addListener('scan', function (content) {
+        scanner.stop();
+        document.getElementById('result').innerHTML = content;
+        const decodedText = binaryToText(content);
+        document.getElementById('decoded-text').innerHTML = decodedText;
+      });
+
+      Instascan.Camera.getCameras()
+        .then(function (cameras) {
+          if (cameras.length > 0) {
+            if (cameraIndex >= cameras.length) {
+              console.error('Invalid camera index.');
+              return;
+            }
+
+            currentCameraIndex = cameraIndex;
+            scanner.start(cameras[cameraIndex]);
+          } else {
+            console.error('No cameras found.');
+          }
+        })
+        .catch(function (error) {
+          console.error('Camera access denied: ', error);
+        });
+    }
+
+    function toggleCamera() {
+  if (scanner) {
+    scanner.stop();
+
+    Instascan.Camera.getCameras()
+      .then(function (cameras) {
+        if (cameras.length > 1) {
+          currentCameraIndex++;
+          if (currentCameraIndex >= cameras.length) {
+            currentCameraIndex = 0;
+          }
+          startScanner(currentCameraIndex);
+        } else {
+          console.error('No multiple cameras available.');
+        }
+      })
+      .catch(function (error) {
+        console.error('Error accessing cameras: ', error);
+      });
+  }
+}
+
+
+    function binaryToText(binary) {
+      const binaryArray = binary.split(' ');
+      let text = '';
+      for (let i = 0; i < binaryArray.length; i++) {
+        const charCode = parseInt(binaryArray[i], 2);
+        const char = String.fromCharCode(charCode);
+        text += char;
+      }
+      return text;
+    }
+
+    // Start scanning QR codes using the back camera
+    startScanner(currentCameraIndex);
+  </script>
+</body>
+</html>
