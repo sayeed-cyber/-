@@ -72,7 +72,6 @@
   <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
 
   <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
   <script>
     let scanner;
     let currentCameraIndex = 0;
@@ -119,15 +118,24 @@
       }
     }
 
-    function decryptData(encryptedText) {
-      const key = CryptoJS.enc.Utf8.parse('ThisIsAStrongEncryptionKey12345678');
-      const iv = CryptoJS.enc.Utf8.parse('ThisIsAnIV123456');
+    async function decryptData(encryptedText) {
+      const key = new TextEncoder().encode('ThisIsAStrongEncryptionKey12345678');
+      const iv = new TextEncoder().encode('ThisIsAnIV123456');
 
-      const ciphertext = CryptoJS.enc.Base64.parse(encryptedText);
-      const decryptor = CryptoJS.AES.decrypt({ ciphertext }, key, { iv });
-      const decryptedText = CryptoJS.enc.Utf8.stringify(decryptor);
+      const encodedCiphertext = atob(encryptedText);
+      const ciphertext = new Uint8Array(encodedCiphertext.length);
+      for (let i = 0; i < encodedCiphertext.length; ++i) {
+        ciphertext[i] = encodedCiphertext.charCodeAt(i);
+      }
 
-      document.getElementById('user-data').innerHTML = decryptedText;
+      try {
+        const decryptedBytes = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, key, ciphertext);
+        const decryptedText = new TextDecoder().decode(decryptedBytes);
+
+        document.getElementById('user-data').innerHTML = decryptedText;
+      } catch (error) {
+        console.error('Decryption failed:', error);
+      }
     }
 
     // Start scanning QR codes using the back camera
