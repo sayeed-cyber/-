@@ -4,7 +4,7 @@
     <title>QR Code Scanner</title>
     <style>
         body {
-            background-color: #61e8ecec;
+            background-color: #d8e471;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,6 +46,12 @@
             font-weight: bold;
         }
 
+        #user-data {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333333;
+        }
+
         #camera-button {
             margin-top: 20px;
             font-size: 16px;
@@ -77,15 +83,17 @@
 </head>
 <body>
     <div id="container">
-        <h1>Innoovatum certificate authentication</h1>
+        <h1>Innoovatum Certificate Authentication</h1>
         <video id="video" autoplay></video>
         <div id="result"></div>
+        <div id="user-data"></div>
         <button id="camera-button">Switch Camera</button>
     </div>
 
     <script>
         const video = document.getElementById('video');
         const result = document.getElementById('result');
+        const userData = document.getElementById('user-data');
         const cameraButton = document.getElementById('camera-button');
 
         let currentStream;
@@ -138,7 +146,9 @@
             const code = jsQR(imageData.data, imageData.width, imageData.height);
 
             if (code) {
-                result.innerHTML = decryptText(code.data);
+                const decryptedText = decryptText(code.data);
+                result.textContent = code.data;
+                userData.textContent = decryptedText;
             }
 
             requestAnimationFrame(scan);
@@ -146,7 +156,7 @@
 
         function decryptText(ciphertext) {
             // Encryption key (16, 24, or 32 bytes long)
-            const key = CryptoJS.enc.Utf8.parse('ThisIsAStrongEncryptionKey12345678');
+            const key = CryptoJS.enc.Utf8.parse('yourencryptionkey1');
             const decryptedBytes = CryptoJS.AES.decrypt(ciphertext, key, {
                 iv: key,
                 mode: CryptoJS.mode.CBC,
