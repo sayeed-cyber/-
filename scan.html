@@ -77,7 +77,7 @@
 </head>
 <body>
     <div id="container">
-        <h1>Innoovatum certificate authentication </h1>
+        <h1>Innoovatum certificate authentication</h1>
         <video id="video" autoplay></video>
         <div id="result"></div>
         <button id="camera-button">Switch Camera</button>
@@ -89,6 +89,7 @@
         const cameraButton = document.getElementById('camera-button');
 
         let currentStream;
+        let currentCamera = 0;
 
         navigator.mediaDevices.enumerateDevices()
             .then((devices) => {
@@ -111,11 +112,12 @@
                     track.stop();
                 });
             }
+            currentCamera = (currentCamera + 1) % 2;
             startVideo();
         }
 
         function startVideo() {
-            navigator.mediaDevices.getUserMedia({ video: true })
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: (currentCamera === 0 ? 'environment' : 'user') } })
                 .then((stream) => {
                     currentStream = stream;
                     video.srcObject = stream;
