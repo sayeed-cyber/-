@@ -94,13 +94,16 @@
 </head>
 <body>
   <div class="container">
-    <h1>Innoovatum certificate authentication</h1>
+    <h1>QR Code Scanner</h1>
     <div id="video-container">
       <video id="video-preview"></video>
     </div>
-   
     <div class="result-section">
-      <h2>certificate information</h2>
+      <h2>Scanned QR Code:</h2>
+      <div id="result"></div>
+    </div>
+    <div class="result-section">
+      <h2>Decoded Text:</h2>
       <div id="decoded-text"></div>
     </div>
     <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
