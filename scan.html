@@ -4,7 +4,7 @@
     <title>QR Code Scanner</title>
     <style>
         body {
-            background-color: #d8e471;
+            background-color: #71e0e4;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -46,12 +46,6 @@
             font-weight: bold;
         }
 
-        #user-data {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #333333;
-        }
-
         #camera-button {
             margin-top: 20px;
             font-size: 16px;
@@ -78,98 +72,61 @@
             }
         }
     </style>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.0.1/jsQR.min.js"></script>
 </head>
 <body>
     <div id="container">
-        <h1>Innoovatum Certificate Authentication</h1>
+        <h1>Innoovatum certificate authentication</h1>
         <video id="video" autoplay></video>
         <div id="result"></div>
-        <div id="user-data"></div>
         <button id="camera-button">Switch Camera</button>
     </div>
 
     <script>
         const video = document.getElementById('video');
         const result = document.getElementById('result');
-        const userData = document.getElementById('user-data');
         const cameraButton = document.getElementById('camera-button');
+        let scanner;
 
-        let currentStream;
-        let currentCamera = 0;
+        function startScan() {
+            scanner = new Instascan.Scanner({ video: video });
 
-        navigator.mediaDevices.enumerateDevices()
-            .then((devices) => {
-                const videoDevices = devices.filter(device => device.kind === 'videoinput');
-                if (videoDevices.length > 1) {
-                    cameraButton.style.display = 'block';
-                }
-            })
-            .catch((error) => {
-                console.error('Error accessing media devices:', error);
+            scanner.addListener('scan', function (content) {
+                const decryptedContent = decryptText(content);
+                result.innerHTML = decryptedContent;
             });
 
-        cameraButton.addEventListener('click', () => {
-            switchCamera();
-        });
-
-        function switchCamera() {
-            if (currentStream) {
-                currentStream.getTracks().forEach(track => {
-                    track.stop();
-                });
-            }
-            currentCamera = (currentCamera + 1) % 2;
-            startVideo();
-        }
-
-        function startVideo() {
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: (currentCamera === 0 ? 'environment' : 'user') } })
-                .then((stream) => {
-                    currentStream = stream;
-                    video.srcObject = stream;
-                    video.play();
-                    requestAnimationFrame(scan);
+            Instascan.Camera.getCameras()
+                .then(function (cameras) {
+                    if (cameras.length > 0) {
+                        scanner.start(cameras[0]);
+                        if (cameras.length > 1) {
+                            cameraButton.style.display = 'block';
+                            let currentCamera = 0;
+                            cameraButton.addEventListener('click', function () {
+                                currentCamera = (currentCamera + 1) % cameras.length;
+                                scanner.start(cameras[currentCamera]);
+                            });
+                        }
+                    } else {
+                        console.error('No cameras found.');
+                    }
                 })
-                .catch((error) => {
-                    console.error('Error accessing webcam:', error);
+                .catch(function (error) {
+                    console.error('Error accessing cameras:', error);
                 });
-        }
-
-        function scan() {
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
-            const code = jsQR(imageData.data, imageData.width, imageData.height);
-
-            if (code) {
-                const decryptedText = decryptText(code.data);
-                result.textContent = code.data;
-                userData.textContent = decryptedText;
-            }
-
-            requestAnimationFrame(scan);
         }
 
         function decryptText(ciphertext) {
-            // Encryption key (16, 24, or 32 bytes long)
-            const key = CryptoJS.enc.Utf8.parse('ThisIsAStrongEncryptionKey12345678');
-            const decryptedBytes = CryptoJS.AES.decrypt(ciphertext, key, {
-                iv: key,
-                mode: CryptoJS.mode.CBC,
-                padding: CryptoJS.pad.Pkcs7
-            });
+            const key = 'ThisIsAStrongEncryptionKey12345678';
+            const decryptedBytes = CryptoJS.AES.decrypt(ciphertext, key);
             const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
             return decryptedText;
         }
 
-        // Start the video when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            startVideo();
-        });
+        // Start the video and QR code scanning when the page loads
+        document.addEventListener('DOMContentLoaded', startScan);
     </script>
 </body>
 </html>
