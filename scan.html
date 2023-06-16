@@ -5,7 +5,7 @@
   <style>
     body {
       display: flex;
-      background-color: antiquewhite;
+      background-color: black;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -29,17 +29,18 @@
       text-align: center;
       font-size: 18px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
 
-    #user-data {
+    #decoded-text {
       text-align: center;
-      margin-top: 20px;
       font-size: 18px;
+      font-weight: bold;
     }
 
     .toggle-button {
       background-color: #4CAF50;
-      color: rgb(214, 212, 107);
+      color: white;
       border: none;
       padding: 10px 16px;
       text-align: center;
@@ -68,8 +69,8 @@
   </div>
   <h2>Scanned QR Code:</h2>
   <div id="result"></div>
-  <h2>User Data:</h2>
-  <div id="user-data"></div>
+  <h2>Decoded Text:</h2>
+  <div id="decoded-text"></div>
   <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
 
   <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
@@ -84,7 +85,8 @@
       scanner.addListener('scan', function (content) {
         scanner.stop();
         document.getElementById('result').innerHTML = content;
-        decryptData(content);
+        const decodedText = binaryToText(content);
+        document.getElementById('decoded-text').innerHTML = decodedText;
       });
 
       Instascan.Camera.getCameras()
@@ -119,25 +121,16 @@
       }
     }
 
-    async function decryptData(encryptedText) {
-  const key = new TextEncoder().encode('ThisIsAStrongEncryptionKey12345678');
-  const iv = new TextEncoder().encode('ThisIsAnIV123456');
-
-  const ciphertext = Uint8Array.from(atob(encryptedText), c => c.charCodeAt(0));
-
-  try {
-    const algorithm = { name: 'AES-CBC', iv };
-    const keyData = await crypto.subtle.importKey('raw', key, algorithm, false, ['decrypt']);
-    const decryptedData = await crypto.subtle.decrypt(algorithm, keyData, ciphertext);
-    const decryptedText = new TextDecoder().decode(decryptedData);
-
-    document.getElementById('user-data').innerHTML = decryptedText;
-  } catch (error) {
-    console.error('Decryption failed:', error);
-  }
-}
-
-
+    function binaryToText(binary) {
+      const binaryArray = binary.split(' ');
+      let text = '';
+      for (let i = 0; i < binaryArray.length; i++) {
+        const charCode = parseInt(binaryArray[i], 2);
+        const char = String.fromCharCode(charCode);
+        text += char;
+      }
+      return text;
+    }
 
     // Start scanning QR codes using the back camera
     startScanner(currentCameraIndex);
