@@ -5,6 +5,7 @@
   <style>
     body {
       display: flex;
+      background-color: antiquewhite;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -119,24 +120,25 @@
     }
 
     async function decryptData(encryptedText) {
-      const key = new TextEncoder().encode('ThisIsAStrongEncryptionKey12345678');
-      const iv = new TextEncoder().encode('ThisIsAnIV123456');
+  const key = new TextEncoder().encode('ThisIsAStrongEncryptionKey12345678');
+  const iv = new TextEncoder().encode('ThisIsAnIV123456');
 
-      const encodedCiphertext = atob(encryptedText);
-      const ciphertext = new Uint8Array(encodedCiphertext.length);
-      for (let i = 0; i < encodedCiphertext.length; ++i) {
-        ciphertext[i] = encodedCiphertext.charCodeAt(i);
-      }
+  const encodedCiphertext = encryptedText;
+  const ciphertext = new Uint8Array(encodedCiphertext.length);
+  for (let i = 0; i < encodedCiphertext.length; ++i) {
+    ciphertext[i] = encodedCiphertext.charCodeAt(i);
+  }
 
-      try {
-        const decryptedBytes = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, key, ciphertext);
-        const decryptedText = new TextDecoder().decode(decryptedBytes);
+  try {
+    const decryptedBytes = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, key, ciphertext);
+    const decryptedText = new TextDecoder().decode(decryptedBytes);
 
-        document.getElementById('user-data').innerHTML = decryptedText;
-      } catch (error) {
-        console.error('Decryption failed:', error);
-      }
-    }
+    document.getElementById('user-data').innerHTML = decryptedText;
+  } catch (error) {
+    console.error('Decryption failed:', error);
+  }
+}
+
 
     // Start scanning QR codes using the back camera
     startScanner(currentCameraIndex);
