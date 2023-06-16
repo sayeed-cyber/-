@@ -4,13 +4,24 @@
   <title>QR Code Scanner</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
       display: flex;
-      background-color: rgb(247, 239, 239);
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #333;
     }
 
     #video-container {
@@ -25,11 +36,19 @@
       height: auto;
     }
 
+    .result-section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
     #result {
       text-align: center;
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     #decoded-text {
@@ -49,11 +68,20 @@
       font-size: 14px;
       margin-bottom: 20px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .toggle-button:hover {
+      background-color: #45a049;
     }
 
     @media (max-width: 600px) {
       body {
         padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
       }
 
       .toggle-button {
@@ -63,15 +91,21 @@
   </style>
 </head>
 <body>
-  <h1>QR Code Scanner</h1>
-  <div id="video-container">
-    <video id="video-preview"></video>
+  <div class="container">
+    <h1>QR Code Scanner</h1>
+    <div id="video-container">
+      <video id="video-preview"></video>
+    </div>
+    <div class="result-section">
+      <h2>Scanned QR Code:</h2>
+      <div id="result"></div>
+    </div>
+    <div class="result-section">
+      <h2>Decoded Text:</h2>
+      <div id="decoded-text"></div>
+    </div>
+    <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
   </div>
-  <h2>Scanned QR Code:</h2>
-  <div id="result"></div>
-  <h2>Decoded Text:</h2>
-  <div id="decoded-text"></div>
-  <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
 
   <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
   <script>
