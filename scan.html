@@ -156,7 +156,7 @@
 
         function decryptText(ciphertext) {
             // Encryption key (16, 24, or 32 bytes long)
-            const key = CryptoJS.enc.Utf8.parse('yourencryptionkey1');
+            const key = CryptoJS.enc.Utf8.parse('ThisIsAStrongEncryptionKey12345678');
             const decryptedBytes = CryptoJS.AES.decrypt(ciphertext, key, {
                 iv: key,
                 mode: CryptoJS.mode.CBC,
