@@ -123,21 +123,20 @@
   const key = new TextEncoder().encode('ThisIsAStrongEncryptionKey12345678');
   const iv = new TextEncoder().encode('ThisIsAnIV123456');
 
-  const encodedCiphertext = encryptedText;
-  const ciphertext = new Uint8Array(encodedCiphertext.length);
-  for (let i = 0; i < encodedCiphertext.length; ++i) {
-    ciphertext[i] = encodedCiphertext.charCodeAt(i);
-  }
+  const ciphertext = Uint8Array.from(atob(encryptedText), c => c.charCodeAt(0));
 
   try {
-    const decryptedBytes = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, key, ciphertext);
-    const decryptedText = new TextDecoder().decode(decryptedBytes);
+    const algorithm = { name: 'AES-CBC', iv };
+    const keyData = await crypto.subtle.importKey('raw', key, algorithm, false, ['decrypt']);
+    const decryptedData = await crypto.subtle.decrypt(algorithm, keyData, ciphertext);
+    const decryptedText = new TextDecoder().decode(decryptedData);
 
     document.getElementById('user-data').innerHTML = decryptedText;
   } catch (error) {
     console.error('Decryption failed:', error);
   }
 }
+
 
 
     // Start scanning QR codes using the back camera
