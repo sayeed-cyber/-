@@ -35,6 +35,7 @@
     #video-preview {
       width: 100%;
       height: auto;
+      transform: scaleX(-1);
     }
 
     .result-section {
@@ -144,17 +145,27 @@
     }
 
     function toggleCamera() {
-      if (scanner) {
-        scanner.stop();
+  if (scanner) {
+    scanner.stop();
 
-        currentCameraIndex++;
-        if (currentCameraIndex >= Instascan.Camera.getCameras().length) {
-          currentCameraIndex = 0;
+    Instascan.Camera.getCameras()
+      .then(function (cameras) {
+        if (cameras.length > 1) {
+          currentCameraIndex++;
+          if (currentCameraIndex >= cameras.length) {
+            currentCameraIndex = 0;
+          }
+          startScanner(currentCameraIndex);
+        } else {
+          console.error('No multiple cameras available.');
         }
+      })
+      .catch(function (error) {
+        console.error('Error accessing cameras: ', error);
+      });
+  }
+}
 
-        startScanner(currentCameraIndex);
-      }
-    }
 
     function binaryToText(binary) {
       const binaryArray = binary.split(' ');
