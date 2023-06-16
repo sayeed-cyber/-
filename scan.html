@@ -3,10 +3,54 @@
 <head>
   <title>QR Code Scanner</title>
   <style>
-    #video-preview {
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    #video-container {
+      position: relative;
       width: 100%;
       max-width: 500px;
-      margin: 0 auto;
+      margin-bottom: 20px;
+    }
+
+    #video-preview {
+      width: 100%;
+      height: auto;
+    }
+
+    #result {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .toggle-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      .toggle-button {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -17,22 +61,32 @@
   </div>
   <h2>Scanned QR Code:</h2>
   <div id="result"></div>
+  <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
 
   <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
   <script>
-    function scanQRCode() {
-      const scanner = new Instascan.Scanner({ video: document.getElementById('video-preview') });
-      const resultContainer = document.getElementById('result');
+    let scanner;
+    let currentCameraIndex = 0;
+
+    function startScanner(cameraIndex) {
+      const video = document.getElementById('video-preview');
+      scanner = new Instascan.Scanner({ video });
 
       scanner.addListener('scan', function (content) {
         scanner.stop();
-        resultContainer.innerHTML = content;
+        document.getElementById('result').innerHTML = content;
       });
 
       Instascan.Camera.getCameras()
         .then(function (cameras) {
           if (cameras.length > 0) {
-            scanner.start(cameras[0]);
+            if (cameraIndex >= cameras.length) {
+              console.error('Invalid camera index.');
+              return;
+            }
+
+            currentCameraIndex = cameraIndex;
+            scanner.start(cameras[cameraIndex]);
           } else {
             console.error('No cameras found.');
           }
@@ -42,8 +96,21 @@
         });
     }
 
-    // Start scanning QR codes
-    scanQRCode();
+    function toggleCamera() {
+      if (scanner) {
+        scanner.stop();
+
+        currentCameraIndex++;
+        if (currentCameraIndex >= Instascan.Camera.getCameras().length) {
+          currentCameraIndex = 0;
+        }
+
+        startScanner(currentCameraIndex);
+      }
+    }
+
+    // Start scanning QR codes using the back camera
+    startScanner(currentCameraIndex);
   </script>
 </body>
 </html>
