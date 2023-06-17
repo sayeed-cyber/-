@@ -44,6 +44,9 @@
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
     }
 
     #result {
@@ -59,24 +62,6 @@
       font-weight: bold;
     }
 
-    .toggle-button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 14px;
-      margin-bottom: 20px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .toggle-button:hover {
-      background-color: #45a049;
-    }
-
     .upload-button {
       background-color: #4286f4;
       color: white;
@@ -88,6 +73,7 @@
       font-size: 14px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-bottom: 10px;
     }
 
     .upload-button:hover {
@@ -124,15 +110,20 @@
         font-size: 24px;
       }
 
-      .toggle-button {
-        font-size: 12px;
+      .container {
+        padding: 20px;
+      }
+
+      .result-section {
+        width: 100%;
+        max-width: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>innoovatum certificate authentication </h1>
+    <h1>Innoovatum certificate authentication</h1>
     <div id="video-container">
       <video id="video-preview" playsinline></video>
     </div>
@@ -144,7 +135,6 @@
       <h2>certificate details</h2>
       <div id="decoded-text"></div>
     </div>
-    <button class="toggle-button" onclick="toggleCamera()">Toggle Camera</button>
     <label for="file-input" class="upload-button">Upload QR Code</label>
     <input id="file-input" type="file" accept="image/*" onchange="processImage(event)">
     <button class="scan-again-button" onclick="scanAgain()">Scan Again</button>
@@ -154,9 +144,8 @@
   <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
   <script>
     let scanner;
-    let currentCameraIndex = 0;
 
-    function startScanner(cameraIndex) {
+    function startScanner() {
       const video = document.getElementById('video-preview');
       scanner = new Instascan.Scanner({ video, mirror: false });
 
@@ -169,14 +158,17 @@
 
       Instascan.Camera.getCameras()
         .then(function (cameras) {
-          if (cameras.length > 0) {
-            if (cameraIndex >= cameras.length) {
-              console.error('Invalid camera index.');
-              return;
+          let selectedCamera;
+          cameras.forEach(function (camera) {
+            if (camera.name.toLowerCase().includes('back')) {
+              selectedCamera = camera;
             }
+          });
 
-            currentCameraIndex = cameraIndex;
-            scanner.start(cameras[cameraIndex]);
+          if (selectedCamera) {
+            scanner.start(selectedCamera);
+          } else if (cameras.length > 0) {
+            scanner.start(cameras[0]);
           } else {
             console.error('No cameras found.');
           }
@@ -184,28 +176,6 @@
         .catch(function (error) {
           console.error('Camera access denied:', error);
         });
-    }
-
-    function toggleCamera() {
-      if (scanner) {
-        scanner.stop();
-
-        Instascan.Camera.getCameras()
-          .then(function (cameras) {
-            if (cameras.length > 1) {
-              currentCameraIndex++;
-              if (currentCameraIndex >= cameras.length) {
-                currentCameraIndex = 0;
-              }
-              startScanner(currentCameraIndex);
-            } else {
-              console.error('No multiple cameras available.');
-            }
-          })
-          .catch(function (error) {
-            console.error('Error accessing cameras:', error);
-          });
-      }
     }
 
     function binaryToText(binary) {
@@ -253,7 +223,7 @@
     }
 
     // Start scanning QR codes using the back camera
-    startScanner(currentCameraIndex);
+    startScanner();
   </script>
 </body>
 </html>
