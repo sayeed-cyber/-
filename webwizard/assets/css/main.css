@@ -609,15 +609,15 @@ body{
     }
 }
 
-@media (max-width: 500px){
+@media (max-width: 450px){
     .intro--banner{
-        height:305px
+        height:250px
     }
     .intro--banner h1{
-        font-size:40px
+        font-size:38px
     }
     .intro--banner h2{
-        font-size: 25px;
+        font-size: 16px;
 
     }
     .intro--banner img{
