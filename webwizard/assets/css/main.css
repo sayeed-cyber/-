@@ -532,7 +532,7 @@ body{
 }
 .intro--banner img{
     position:absolute;
-    bottom:20px;
+    bottom:-20px;
     right:-12px
 }
 .intro--options{
@@ -551,7 +551,7 @@ body{
 .intro--options>a{
     max-width:250px;
     text-decoration:none;
-    color:#282828;
+    color:#474463;
     -webkit-transition:color .2s ease-in-out;
     transition:color .2s ease-in-out
 }
@@ -567,7 +567,7 @@ body{
 }
 @media (max-width: 900px){
     .intro--banner{
-        height:380px
+        height:310px
     }
     .intro--banner h1{
         font-size:55px
