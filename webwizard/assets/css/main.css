@@ -876,7 +876,7 @@ body{
     left:200px;
     -webkit-transform:rotate(-25deg);
     transform:rotate(-25deg);
-    border:5px solid #0f33ff;
+    border:5px ;
     border-right-color:transparent;
     border-bottom-color:transparent
 }
@@ -889,7 +889,6 @@ body{
     transform:rotate(45deg);
     width:10px;
     height:10px;
-    background-color:#0f33ff
 }
 .about--banner h2{
     position:relative;
@@ -916,7 +915,6 @@ body{
     left:255px;
     width:10px;
     height:10px;
-    background-color:#0f33ff
 }
 .about--banner a{
     padding:5px 17px 5px 0;

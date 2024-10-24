@@ -1077,7 +1077,7 @@
     }), $(".cta").click(function() {
         var t = $(".side-nav").find(".is-active"),
             n = $(".side-nav").children().index(t),
-            s = $(".side-nav").children().length - 3,
+            s = $(".side-nav").children().length - 2,  // to change the button navigation of contact me 
             r = s;
         e(s), i(n, r, s)
     });

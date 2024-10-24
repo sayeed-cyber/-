@@ -93,7 +93,7 @@
                 <span class="text-animation">Give me a problem, </span>
                 <span class="text-animation delay1">24 hours, </span>
                 <span class="text-animation delay2">coffee, </span>
-                <span class="text-animation delay3">and a spark of creativity.</span>
+                <span class="text-animation delay3">and machine running Linux 🐧.</span>
                 <br>
                 <br>
             </div>
@@ -297,10 +297,42 @@
           </li>
           
        
-          <!-- <li class="l-section section">
+          <li class="l-section section">
+
+
+            <div class="shaukat">
+              <video id="videoPlayer" autoplay muted></video>
+          </div>
+      
+          <script>
+              // Array of video filenames
+              const videos = ['1.mp4','2.mp4','3.mp4','4.mp4','7.mp4','8.mp4','9.mp4','5.mp4','6.mp4']
+              let currentVideo = 0; // Start from the first video
+      
+              // Get the video element
+              const videoPlayer = document.getElementById('videoPlayer');
+      
+              // Function to play the next video
+              function playNextVideo() {
+                  // Set the current video source
+                  videoPlayer.src = videos[currentVideo];
+                  videoPlayer.play();
+      
+                  // Increment the current video index
+                  currentVideo = (currentVideo + 1) % videos.length; // Loop back to the first video when reaching the end
+              }
+      
+              // When the video ends, play the next one
+              videoPlayer.addEventListener('ended', playNextVideo);
+      
+              // Start playing the first video on load
+              playNextVideo();
+          </script>
+
             <div class="about">
               <div class="about--banner">
-                <h2>We<br>believe in<br>passionate<br>people</h2>
+                <h2>I<br>believe in<br>passion and creativity</h2>
+                <h6>``Your imagination fuels the future let AI take care of the details.``</h6>
                 <a href="https://www.airobrain.tk/collaboration.html">Career
                   <span>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
@@ -310,22 +342,22 @@
                     </svg>
                   </span>
                 </a>
-                <img src="assets/img/about-visual.png" alt="About Us">
               </div>
               <div class="about--options">
                 <a href="#0">
                   <h3>Winners</h3>
                 </a>
                 <a href="#0">
-                  <h3>Philosophy</h3>
+                  <h3>history</h3>
                 </a> 
-                <a href="https://www.airobrain.tk/about">
-                  <h3>History</h3>
-                </a>
+                
                 
               </div>
             </div>
-          </li> -->
+          </li> 
+
+
+
           <li class="l-section section">
             <div class="contact">
               <div class="contact--lockup">
@@ -337,7 +369,7 @@
                   </div>
                   <ul class="modal--options">
                     <li><a href="www.linkedin.com/in/sayeed-khan-jefreonsyed-airobrain-driven-by-a-passion-for-cutting-edge-technology">LinkedIn</a></li>
-                    <li><a href="#0">instagram</a></li>
+                    <li><a href="">instagram</a></li>
                     <li><a href="https://github.com/sayeed-cyber" target="_blank">github</a></li>
                     
                   </ul>
@@ -349,8 +381,8 @@
             <div class="hire">
               <h2>we can do any thing that turns blue when you click it</h2>
               <!-- checkout formspree.io for easy form setup -->
-              <form class="work-request">
-                <div class="work-request--options">
+              <!-- <form class="work-request"> -->
+                <!-- <div class="work-request--options">
                   <span class="options-a">
                     <input id="opt-1" type="checkbox" value="app design">
                   
@@ -417,7 +449,7 @@
                     </label>
                     
                   </span>
-                </div>
+                </div> -->
           
               </form>
               <footer style="text-align: center; font-size: 12px; font-family: Arial; color: #bcbcbc;">
@@ -428,7 +460,7 @@
           </li>
 
           
-          <li class="l-section section">
+          <!-- <li class="l-section section">
             <div class="shaukat">
               <video id="videoPlayer" autoplay muted></video>
           </div>
@@ -457,7 +489,7 @@
               // Start playing the first video on load
               playNextVideo();
           </script>
-          </li>
+          </li> -->
 
 
         </ul>
@@ -467,8 +499,8 @@
   <ul class="outer-nav">
     <li class="is-active">Intro</li>
     <li>Tech</li>
+    <li>hobbis</li>
     <li>Contact</li>
-    <li>donno</li>
     <li>hobbis</li>
   </ul>
 </div>
