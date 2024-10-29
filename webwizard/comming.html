@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon (Whenever I Get Around to It)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 4rem;
+      animation: bounce 2s infinite;
+    }
+
+    p {
+      font-size: 2rem;
+      animation: fadeIn 3s;
+    }
+
+    .loader {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      p {
+        text-align: center;
+        font-size: 1.5rem;
+      }
+
+      .modal-content {
+        width: 80%;
+      }
+    }
+
+    /* Interactive elements */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 30%;
+    }
+
+    .sarcastic-button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .sarcastic-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Coming Soon</h1>
+  <p >As soon as I get around to it. Maybe. Probably not.</p>
+  <div class="loader"></div>
+
+  <audio id="background-music" loop>
+    <source src="background-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="confetti-container"></div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2 style="color: rgb(193, 141, 141);"></h2>
+      <p style="color: rgb(0, 0, 0);"> Aren’t you busy with anything?</p>
+      <button id="close-modal" class="sarcastic-button">no</button>
+    </div>
+  </div>
+
+ 
+
+  <script>
+    // Add a click event to the page
+    document.addEventListener('click', () => {
+      alert("Wow, you actually clicked on this? I'm impressed. But don't hold your breath waiting for an update,get back to your work");
+    });
+
+    // Play background music as soon as the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      const backgroundMusic = document.getElementById('background-music');
+      backgroundMusic.volume = 0.2; // Set volume to 20%
+      backgroundMusic.play();
+
+      // Create confetti effect
+      const confettiContainer = document.getElementById('confetti-container');
+      setInterval(() => {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confettiContainer.appendChild(confetti);
+      }, 100);
+
+      // Show modal after 5 seconds
+      setTimeout(() => {
+        const modal = document.getElementById('modal');
+        modal.style.display = 'block';
+      }, 5000);
+
+      // Close modal when button is clicked
+      const closeModal = document.getElementById('close-modal');
+      closeModal.addEventListener('click', () => {
+        const modal = document.getElementById('modal');
+        modal.style.display = 'none';
+      });
+
+      // Show sarcastic container after 10 seconds
+      setTimeout(() => {
+        const sarcasticContainer = document.getElementById('sarcastic-container');
+        sarcasticContainer.style.display = 'block';
+      }, 10000);
+
+      // Add more sarcastic content when button is clicked
+      const sarcasticButton = document.getElementById('sarcastic-button');
+      sarcasticButton.addEventListener('click', () => {
+        alert("Congratulations, you've unlocked the 'Sarcasm Overload' achievement. Your life must be incredibly fulfilling.");
+      });
+    });
+  </script>
+</body>
+</html>
