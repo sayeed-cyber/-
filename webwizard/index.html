@@ -333,7 +333,7 @@
               <div class="about--banner">
                 <h2>I<br>believe in<br>passion and creativity</h2>
                 <h6>``Your imagination fuels the future let AI take care of the details.``</h6>
-                <a href="https://www.airobrain.tk/collaboration.html">Career
+                <a href="comming.html">innovation's
                   <span>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                     <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -379,6 +379,7 @@
           </li>
           <li class="l-section section">
             <div class="hire">
+              
               
               <!-- checkout formspree.io for easy form setup -->
               <!-- <form class="work-request"> -->
@@ -450,6 +451,321 @@
                     
                   </span>
                 </div> -->
+
+
+
+
+                <!-- <div class="slider-container">
+  <style>
+    .slider-container {
+      height: 100vh;
+      background: black;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00ffcc, #00ff88);
+      z-index: 1000;
+      animation: progress 8s linear infinite;
+    }
+
+    @keyframes progress {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: perspective(1000px) translateX(100%) rotateY(20deg);
+      transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: perspective(1000px) translateX(0) rotateY(0);
+    }
+
+    .slide.prev {
+      opacity: 0;
+      transform: perspective(1000px) translateX(-100%) rotateY(-20deg);
+    }
+
+    .slide-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 2rem;
+      width: 80%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      box-shadow: 0 0 30px rgba(0, 255, 204, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .slide-image-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      transform: perspective(1000px) rotateY(-5deg);
+      transition: transform 0.5s ease;
+    }
+
+    .slide-content:hover .slide-image-container {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transform: scale(1.1);
+      transition: transform 0.5s ease;
+    }
+
+    .slide-content:hover .slide-image {
+      transform: scale(1);
+    }
+
+    .slide-text {
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .slide-text h2 {
+      font-size: 2.5rem;
+      margin: 1rem 0;
+      background: linear-gradient(45deg, #00ffcc, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s forwards 0.5s;
+    }
+
+    .slide-text p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s forwards 0.7s;
+    }
+
+    .slide-number {
+      position: absolute;
+      right: 40px;
+      bottom: 40px;
+      font-size: 8rem;
+      font-weight: bold;
+      opacity: 0.1;
+      color: white;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .navigation-dots {
+      position: fixed;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .dot.active {
+      background: #00ffcc;
+      border-color: #00ffcc;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+  </style>
+
+  <div class="progress-bar"></div>
+  <div class="navigation-dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div class="slide active">
+    <div class="slide-content">
+      <div class="slide-image-container">
+        <img src="/api/placeholder/600/400" alt="Quantum Computing" class="slide-image">
+      </div>
+      <div class="slide-text">
+        <div class="slide-icon">🌌</div>
+        <h2>Quantum Computing</h2>
+        <p>Exploring the fascinating realm of quantum mechanics and its revolutionary applications in computing. Diving deep into qubits, superposition, and quantum algorithms that will reshape our technological future.</p>
+      </div>
+    </div>
+    <div class="slide-number">01</div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <div class="slide-image-container">
+        <img src="/api/placeholder/600/400" alt="Generative AI" class="slide-image">
+      </div>
+      <div class="slide-text">
+        <div class="slide-icon">🤖</div>
+        <h2>Generative AI</h2>
+        <p>Pushing the boundaries of artificial creativity through advanced neural networks and machine learning algorithms. Creating systems that can generate art, music, and ideas.</p>
+      </div>
+    </div>
+    <div class="slide-number">02</div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <div class="slide-image-container">
+        <img src="/api/placeholder/600/400" alt="NLP" class="slide-image">
+      </div>
+      <div class="slide-text">
+        <div class="slide-icon">📝</div>
+        <h2>Natural Language Processing</h2>
+        <p>Bridging the gap between human communication and machine understanding through innovative language models and semantic analysis.</p>
+      </div>
+    </div>
+    <div class="slide-number">03</div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <div class="slide-image-container">
+        <img src="/api/placeholder/600/400" alt="Horses" class="slide-image">
+      </div>
+      <div class="slide-text">
+        <div class="slide-icon">🐎</div>
+        <h2>Horses</h2>
+        <p>Admiring the grace, power, and intelligence of these majestic creatures. Each interaction brings new appreciation for their beauty and spirit.</p>
+      </div>
+    </div>
+    <div class="slide-number">04</div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <div class="slide-image-container">
+        <img src="/api/placeholder/600/400" alt="Cats" class="slide-image">
+      </div>
+      <div class="slide-text">
+        <div class="slide-icon">🐱</div>
+        <h2>Cats</h2>
+        <p>Discovering the mysterious world of felines, their elegant movements, and their perfect balance of independence and affection.</p>
+      </div>
+    </div>
+    <div class="slide-number">05</div>
+  </div>
+
+  <div class="slide">
+    <div class="slide-content">
+      <div class="slide-image-container">
+        <img src="/api/placeholder/600/400" alt="Dogs" class="slide-image">
+      </div>
+      <div class="slide-text">
+        <div class="slide-icon">🐕</div>
+        <h2>Dogs</h2>
+        <p>Sharing life with loyal companions who bring unconditional love and joy to every moment. Each tail wag tells a story of friendship.</p>
+      </div>
+    </div>
+    <div class="slide-number">06</div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach(slide => {
+        slide.classList.remove('active', 'prev');
+        slide.classList.add('next');
+      });
+      
+      if (currentSlide > 0) {
+        slides[currentSlide - 1].classList.add('prev');
+      } else {
+        slides[slides.length - 1].classList.add('prev');
+      }
+      
+      slides[index].classList.add('active');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+        resetProgressBar();
+      });
+    });
+
+    function resetProgressBar() {
+      const progressBar = document.querySelector('.progress-bar');
+      progressBar.style.animation = 'none';
+      progressBar.offsetHeight; // Trigger reflow
+      progressBar.style.animation = null;
+    }
+
+    // Auto-advance slides
+    setInterval(() => {
+      nextSlide();
+      resetProgressBar();
+    }, 8000);
+  </script>
+</div> -->
           
               </form>
               <footer style="text-align: center; font-size: 12px; font-family: Arial; color: #bcbcbc;">
@@ -499,9 +815,9 @@
   <ul class="outer-nav">
     <li class="is-active">Intro</li>
     <li>Tech</li>
-    <li>hobbis</li>
-    <li>Contact</li>
-    <li>hobbis</li>
+    <li>🧠</li>
+    <li>☎️📬</li>
+    <li>⏲</li>
   </ul>
 </div>
 
