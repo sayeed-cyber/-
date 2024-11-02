@@ -16,6 +16,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="assets/css/main.css">
   
+
+
+
+
+    <!-- Standard viewport for mobile responsiveness -->
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+    
+    <script>
+      // Function to detect if the Instagram in-app browser is being used
+      function isInstagramBrowser() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        return userAgent.includes("Instagram");
+      }
+  
+      // Apply desktop-like width if Instagram browser is detected
+      if (isInstagramBrowser()) {
+        document.querySelector("meta[name=viewport]").setAttribute("content", "width=1024");
+      }
+    </script>
+
+ 
+
+
 </head>
 <body>
   
