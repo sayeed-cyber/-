@@ -20,21 +20,18 @@
 
 
 
-    <!-- Standard viewport for mobile responsiveness -->
-    <meta name="viewport" content="width=1024, initial-scale=1.0">
-    
-    <script>
-      // Function to detect if the Instagram in-app browser is being used
-      function isInstagramBrowser() {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        return userAgent.includes("Instagram");
-      }
+  <script>
+    // Function to check if the visitor is using Instagram's in-app browser
+    function isInstagramBrowser() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      return userAgent.includes("Instagram");
+    }
   
-      // Apply desktop-like width if Instagram browser is detected
-      if (isInstagramBrowser()) {
-        document.querySelector("meta[name=viewport]").setAttribute("content", "width=1024");
-      }
-    </script>
+    // Redirect to desktop site if using Instagram browser
+    if (isInstagramBrowser()) {
+      console.log('fuck this shitty instagram browser , please open it in chrome or any other browser ')// Replace with your desktop site URL
+    }
+  </script>
 
  
 
