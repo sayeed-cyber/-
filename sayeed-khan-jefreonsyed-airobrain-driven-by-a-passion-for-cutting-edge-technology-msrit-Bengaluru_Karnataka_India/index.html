@@ -29,10 +29,21 @@
   
     // Redirect to desktop site if using Instagram browser
     // if (isInstagramBrowser()) {
-      while (isInstagramBrowser() ){
-        alert('fuck this shitty instagram browser , please open it in chrome or any other browser ')// Replace with your desktop site URL
+      let alertCount = 0;
+const maxAlerts = 3; // Set the maximum number of times the alert should pop up
+const delay = 5000; // 5 seconds in milliseconds
 
-      }
+setTimeout(function showAlert() {
+    while (isInstagramBrowser() && alertCount < maxAlerts) {
+        alert('Please open this in Chrome or any other browser'); // Replace with your desktop site URL
+        alertCount++;
+        
+        if (alertCount < maxAlerts) {
+            setTimeout(showAlert, delay); // Schedule the next alert after a 5-second delay
+        }
+        break; // Exit the loop after showing the alert to avoid infinite looping in the same iteration
+    }
+}, delay);
     
   </script>
 
