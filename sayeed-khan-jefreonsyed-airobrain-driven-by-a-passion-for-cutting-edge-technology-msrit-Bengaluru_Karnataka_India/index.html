@@ -30,12 +30,12 @@
     // Redirect to desktop site if using Instagram browser
     // if (isInstagramBrowser()) {
       let alertCount = 0;
-const maxAlerts = 3; // Set the maximum number of times the alert should pop up
+const maxAlerts = 5; // Set the maximum number of times the alert should pop up
 const delay = 5000; // 5 seconds in milliseconds
 
 setTimeout(function showAlert() {
     while (isInstagramBrowser() && alertCount < maxAlerts) {
-        alert('Please open this in Chrome or any other browser'); // Replace with your desktop site URL
+        alert('iski ma ka instagram , Please open this in Chrome or any other browser'); // Replace with your desktop site URL
         alertCount++;
         
         if (alertCount < maxAlerts) {
