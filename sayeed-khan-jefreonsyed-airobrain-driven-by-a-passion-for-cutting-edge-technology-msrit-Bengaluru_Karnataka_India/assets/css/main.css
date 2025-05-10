@@ -483,10 +483,10 @@ body{
     justify-content:center;
     margin:0 auto
 }
-@media (max-width: 1180px){
+@media (max-width: 1480px){
     .intro{
-        max-width:100%
-    }
+        max-width:100%}
+  
 }
 .intro--banner{
     position:relative;
@@ -532,7 +532,7 @@ body{
 }
 .intro--banner img{
     position:absolute;
-    bottom:-20px;
+    bottom:-100px;
     right:-12px
 }
 .intro--options{
@@ -567,13 +567,13 @@ body{
 }
 @media (max-width: 900px){
     .intro--banner{
-        height:310px
+        height:370px
     }
     .intro--banner h1{
         font-size:55px
     }
     .intro--banner img{
-        width:430px
+        width:270px
     }
     .intro--options>a{
         margin-right:30px
@@ -594,7 +594,7 @@ body{
 
     }
     .intro--banner img{
-        width:350px
+        width:250px
     }
     .intro--options{
         display:block
@@ -1525,3 +1525,17 @@ body{
     font-family: Arial, sans-serif;
     text-align: center;
 }
+
+/* Fix for screens wider than 900px */
+@media (min-width: 1700px) {
+    .l-wrapper,
+    .intro,
+    .work,
+    .about,
+    .contact--lockup {
+        max-width: 100%; /* Ensure full width */
+        margin: 0 auto; /* Center the content */
+        padding: 0 20px; /* Optional: Add some padding for better spacing */
+    }
+}
+
