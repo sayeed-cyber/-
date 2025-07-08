@@ -205,12 +205,14 @@ body{
     box-shadow:0 0 45px 5px rgba(0,0,0,0.85);
     overflow:hidden
 }
-.l-wrapper{
-    position:relative;
-    width:1440px;
-    max-width:90%;
-    height:100%;
-    margin:0 auto
+.l-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 .l-side-nav{
     position:absolute;
@@ -1536,6 +1538,83 @@ body{
         max-width: 100%; /* Ensure full width */
         margin: 0 auto; /* Center the content */
         padding: 0 20px; /* Optional: Add some padding for better spacing */
+    }
+}
+
+/* Adding responsive design improvements for larger screens */
+@media (min-width: 1200px) {
+    .l-wrapper {
+        width: 90%;
+        max-width: 1200px;
+    }
+    
+    .intro {
+        width: 90%;
+        max-width: 1200px;
+    }
+    
+    .work {
+        width: 90%;
+        max-width: 1200px;
+    }
+    
+    .about {
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    .contact--lockup {
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    /* Adjust font sizes for better readability on larger screens */
+    .intro--banner h1 {
+        font-size: 4.5vw;
+    }
+
+    .intro--banner h2 {
+        font-size: 2.5vw;
+    }
+
+    /* Make work items larger on big screens */
+    .work--lockup .slider--item-center .slider--item-image {
+        width: 400px;
+        height: 400px;
+    }
+
+    .work--lockup .slider--item-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    /* Adjust modal size for contact */
+    .contact--lockup .modal {
+        padding: 60px 60px;
+        max-width: 800px;
+    }
+}
+
+/* Ensure content doesn't get too small on ultra-wide screens */
+@media (min-width: 1800px) {
+    body {
+        font-size: 16px;
+    }
+
+    .l-wrapper,
+    .intro,
+    .work,
+    .about,
+    .contact--lockup {
+        max-width: 1400px;
+    }
+
+    .intro--banner h1 {
+        font-size: 72px;
+    }
+
+    .intro--banner h2 {
+        font-size: 36px;
     }
 }
 
