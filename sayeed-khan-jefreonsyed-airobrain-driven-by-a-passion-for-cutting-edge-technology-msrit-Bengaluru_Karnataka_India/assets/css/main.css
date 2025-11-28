@@ -503,7 +503,7 @@ body{
 }
 .intro--banner button{
     position:relative;
-    padding:5px 17px 5px 12px;
+    padding:3px 10px 3px 8px;
     font-weight:700;
     text-transform:uppercase;
     background-color:transparent;
@@ -534,8 +534,11 @@ body{
 }
 .intro--banner img{
     position:absolute;
-    bottom:-100px;
-    right:-12px
+    bottom:-90px;
+    left:55%
+}
+.mobile-break{
+    display:none
 }
 .intro--options{
     display:-webkit-box;
@@ -586,17 +589,23 @@ body{
 }
 @media (max-width: 767px){
     .intro--banner{
-        height:305px
+        height:260px
     }
     .intro--banner h1{
-        font-size:44px
+        font-size:36px;
+        margin-top: -10px
     }
     .intro--banner h2{
         font-size: 25px;
-
+        margin-top: -5px
+    }
+    .mobile-break{
+        display:block
     }
     .intro--banner img{
-        width:250px
+        width:180px;
+        left:65%;
+        bottom:-60px
     }
     .intro--options{
         display:block
@@ -613,17 +622,20 @@ body{
 
 @media (max-width: 450px){
     .intro--banner{
-        height:230px
+        height:200px
     }
     .intro--banner h1{
-        font-size:38px
+        font-size:30px;
+        margin-top: -15px
     }
     .intro--banner h2{
         font-size: 16px;
-
+        margin-top: -8px
     }
     .intro--banner img{
-        width:210px
+        width:160px;
+        left:60%;
+        bottom:-50px
     }
     .intro--options{
         display:block
